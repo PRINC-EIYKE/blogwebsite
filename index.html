@@ -1,0 +1,351 @@
+a <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Ikechukwu's bespoke personal finance dashboard, ledger, budget, savings vaults and analytics.">
+  <meta name="theme-color" content="#090D10">
+  <title>Ikechukwu — Personal Finance Dashboard</title>
+
+  <!-- Google Fonts: Plus Jakarta Sans & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Modular Stylesheets -->
+  <link rel="stylesheet" href="style/variables.css">
+  <link rel="stylesheet" href="style/reset.css">
+  <link rel="stylesheet" href="style/layout.css">
+  <link rel="stylesheet" href="style/components.css">
+  <link rel="stylesheet" href="style/views.css">
+</head>
+<body>
+
+  <div class="app-container">
+    <!-- Backdrop for mobile drawer -->
+    <div class="sidebar-backdrop"></div>
+
+    <!-- Sidebar Navigation -->
+    <aside class="app-sidebar">
+      <div class="sidebar-brand">
+        <div class="brand-icon-box">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <rect width="18" height="18" x="3" y="3" rx="2"/>
+            <circle cx="12" cy="12" r="3"/>
+            <path d="m14.5 9.5 2-2"/>
+            <path d="m9.5 14.5-2 2"/>
+            <path d="m9.5 9.5-2-2"/>
+            <path d="m14.5 14.5 2 2"/>
+          </svg>
+        </div>
+        <div class="brand-text">
+          <h1>Apex Vault</h1>
+          <span>Private Ledger</span>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav">
+        <div class="nav-section-title">Core Management</div>
+        
+        <a href="#dashboard" class="nav-item active" data-view="dashboard" id="nav-dashboard">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect width="7" height="9" x="3" y="3" rx="1"/>
+            <rect width="7" height="5" x="14" y="3" rx="1"/>
+            <rect width="7" height="9" x="14" y="12" rx="1"/>
+            <rect width="7" height="5" x="3" y="16" rx="1"/>
+          </svg>
+          <span>Dashboard</span>
+        </a>
+
+        <a href="#transactions" class="nav-item" data-view="transactions" id="nav-transactions">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="8" y1="6" x2="21" y2="6"/>
+            <line x1="8" y1="12" x2="21" y2="12"/>
+            <line x1="8" y1="18" x2="21" y2="18"/>
+            <line x1="3" y1="6" x2="3.01" y2="6"/>
+            <line x1="3" y1="12" x2="3.01" y2="12"/>
+            <line x1="3" y1="18" x2="3.01" y2="18"/>
+          </svg>
+          <span>Transactions</span>
+          <span class="nav-badge">10</span>
+        </a>
+
+        <a href="#budget" class="nav-item" data-view="budget" id="nav-budget">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/>
+            <path d="M12 6v6l4 2"/>
+          </svg>
+          <span>Budget Tracker</span>
+        </a>
+
+        <a href="#savings" class="nav-item" data-view="savings" id="nav-savings">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/>
+          </svg>
+          <span>Savings & Vaults</span>
+        </a>
+
+        <div class="nav-section-title">Analytics</div>
+
+        <a href="#report" class="nav-item" data-view="report" id="nav-report">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 3v18h18"/>
+            <path d="m19 9-5 5-4-4-3 3"/>
+          </svg>
+          <span>Financial Reports</span>
+        </a>
+      </nav>
+
+      <!-- Sidebar User Profile -->
+      <div class="sidebar-user-card">
+        <div class="user-avatar">IK</div>
+        <div class="user-info">
+          <div class="user-name">Ikechukwu</div>
+          <div class="user-tier">
+            <span class="user-tier-dot"></span>
+            Apex Member
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content Shell -->
+    <div class="app-main">
+      <!-- Top App Header -->
+      <header class="app-header">
+        <div class="header-left">
+          <button id="mobile-menu-toggle" class="mobile-menu-toggle" aria-label="Toggle menu">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="4" y1="12" x2="20" y2="12"/>
+              <line x1="4" y1="6" x2="20" y2="6"/>
+              <line x1="4" y1="18" x2="20" y2="18"/>
+            </svg>
+          </button>
+          <div class="header-title-group">
+            <h2 id="header-view-title">Executive Overview</h2>
+            <div id="header-view-subtitle" class="header-subtitle">Live cashflow and net worth metrics</div>
+          </div>
+        </div>
+
+        <div class="header-right">
+          <!-- Currency Switcher Toggle -->
+          <div class="currency-switcher">
+            <button class="currency-btn active" data-currency="NGN">₦ NGN</button>
+            <button class="currency-btn" data-currency="USD">$ USD</button>
+          </div>
+
+          <!-- Add Transaction CTA -->
+          <button class="btn btn-primary btn-sm" onclick="App.openAddTxModal()">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M5 12h14"/><path d="M12 5v14"/>
+            </svg>
+            <span class="btn-text">Record Entry</span>
+          </button>
+        </div>
+      </header>
+
+      <!-- Page Views Container -->
+      <main class="view-container">
+        <!-- 1. Dashboard View -->
+        <section id="view-dashboard" class="view-section active"></section>
+
+        <!-- 2. Transaction History View -->
+        <section id="view-transactions" class="view-section"></section>
+
+        <!-- 3. Budget View -->
+        <section id="view-budget" class="view-section"></section>
+
+        <!-- 4. Savings View -->
+        <section id="view-savings" class="view-section"></section>
+
+        <!-- 5. Report View -->
+        <section id="view-report" class="view-section"></section>
+      </main>
+    </div>
+  </div>
+
+  <!-- Mobile Bottom Navigation Bar -->
+  <nav class="mobile-bottom-nav">
+    <ul>
+      <li>
+        <a href="#dashboard" class="mobile-nav-link active" data-view="dashboard">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect width="7" height="9" x="3" y="3" rx="1"/>
+            <rect width="7" height="5" x="14" y="3" rx="1"/>
+            <rect width="7" height="9" x="14" y="12" rx="1"/>
+            <rect width="7" height="5" x="3" y="16" rx="1"/>
+          </svg>
+          <span>Home</span>
+        </a>
+      </li>
+      <li>
+        <a href="#transactions" class="mobile-nav-link" data-view="transactions">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="8" y1="6" x2="21" y2="6"/>
+            <line x1="8" y1="12" x2="21" y2="12"/>
+            <line x1="8" y1="18" x2="21" y2="18"/>
+            <line x1="3" y1="6" x2="3.01" y2="6"/>
+          </svg>
+          <span>Ledger</span>
+        </a>
+      </li>
+      <li>
+        <a href="#budget" class="mobile-nav-link" data-view="budget">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/>
+            <path d="M12 6v6l4 2"/>
+          </svg>
+          <span>Budget</span>
+        </a>
+      </li>
+      <li>
+        <a href="#savings" class="mobile-nav-link" data-view="savings">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/>
+          </svg>
+          <span>Vaults</span>
+        </a>
+      </li>
+      <li>
+        <a href="#report" class="mobile-nav-link" data-view="report">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M3 3v18h18"/>
+            <path d="m19 9-5 5-4-4-3 3"/>
+          </svg>
+          <span>Reports</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+  <!-- MODAL: Record Transaction -->
+  <div id="modal-add-tx" class="modal-overlay">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3 class="modal-title">Record Financial Entry</h3>
+        <button class="modal-close" aria-label="Close modal">&times;</button>
+      </div>
+      <form id="form-add-tx">
+        <div class="modal-body">
+          <div class="form-group">
+            <label class="form-label" for="tx-desc">Description / Merchant</label>
+            <input type="text" id="tx-desc" class="form-input" placeholder="e.g. AWS Cloud Services, Client Payment" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="tx-amount">Amount (in NGN ₦)</label>
+            <input type="number" id="tx-amount" class="form-input" placeholder="e.g. 150000" min="1" step="any" required>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-md);">
+            <div class="form-group">
+              <label class="form-label" for="tx-type">Entry Type</label>
+              <select id="tx-type" class="form-select">
+                <option value="expense">Outflow (Expense)</option>
+                <option value="income">Inflow (Income)</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="tx-category">Category</label>
+              <select id="tx-category" class="form-select">
+                <option value="Tech & Cloud">Tech & Cloud</option>
+                <option value="Food & Dining">Food & Dining</option>
+                <option value="Utilities">Utilities</option>
+                <option value="Transport">Transport</option>
+                <option value="Health & Lifestyle">Health & Lifestyle</option>
+                <option value="Income">Direct Income</option>
+                <option value="General">Other / General</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="tx-method">Payment Instrument</label>
+            <select id="tx-method" class="form-select">
+              <option value="Virtual USD Card">Virtual USD Card</option>
+              <option value="Mastercard Debit">Mastercard Debit</option>
+              <option value="Direct Wire">Direct Wire / SWIFT</option>
+              <option value="Bank Transfer">Bank Transfer (NIP)</option>
+              <option value="Apple Pay">Apple Pay</option>
+            </select>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-modal-close>Cancel</button>
+          <button type="submit" class="btn btn-primary">Save to Ledger</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL: Deposit into Vault -->
+  <div id="modal-deposit" class="modal-overlay">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3 class="modal-title">Deposit Capital into Vault</h3>
+        <button class="modal-close" aria-label="Close modal">&times;</button>
+      </div>
+      <form id="form-deposit">
+        <div class="modal-body">
+          <div class="form-group">
+            <label class="form-label" for="deposit-vault-id">Target Vault</label>
+            <select id="deposit-vault-id" class="form-select"></select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="deposit-amount">Deposit Amount (in NGN ₦)</label>
+            <input type="number" id="deposit-amount" class="form-input" placeholder="e.g. 250000" min="1" step="any" required>
+          </div>
+
+          <p style="font-size: 0.78rem; color: var(--text-muted);">
+            Funds will be allocated immediately and tracked against your milestone target.
+          </p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-modal-close>Cancel</button>
+          <button type="submit" class="btn btn-primary">Confirm Allocation</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL: Budget Ceiling Adjust/Add -->
+  <div id="modal-budget" class="modal-overlay">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3 id="budget-modal-title" class="modal-title">Adjust Budget Ceiling</h3>
+        <button class="modal-close" aria-label="Close modal">&times;</button>
+      </div>
+      <form id="form-budget">
+        <input type="hidden" id="budget-edit-id">
+        <div class="modal-body">
+          <div class="form-group">
+            <label class="form-label" for="budget-category-name">Category Name</label>
+            <input type="text" id="budget-category-name" class="form-input" placeholder="e.g. Entertainment" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="budget-limit-val">Monthly Allowance Limit (₦)</label>
+            <input type="number" id="budget-limit-val" class="form-input" placeholder="e.g. 200000" min="1" step="any" required>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-modal-close>Cancel</button>
+          <button type="submit" class="btn btn-primary">Save Ceiling</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div id="toast-container" class="toast-container"></div>
+
+  <!-- Modular Scripts -->
+  <script src="script/data.js"></script>
+  <script src="script/state.js"></script>
+  <script src="script/charts.js"></script>
+  <script src="script/views.js"></script>
+  <script src="script/app.js"></script>
+</body>
+</html>
